@@ -1,0 +1,126 @@
+ @mixin fangxing($size){
+   width:$size;
+   height:$size;
+}
+ @mixin juzhong{
+   position:absolute;
+   top:0;
+   bottom:0;
+   left:0;
+   right:0;
+   margin:auto;
+ }
+ @mixin zuoyou{
+   position:absolute;
+   left:0;
+   right:0;
+   margin:auto;
+ }
+ @mixin shangxia{
+   position:absolute;
+   top:0;
+   bottom:0;
+   margin:auto;
+ }
+ @mixin yuan{
+   @include fangxing($size);
+   border-radius:50%;
+ }
+ //不可接受参数，但高效
+ %juzhong{
+   position:absolute;
+   top:0;
+   bottom:0;
+   left:0;
+   right:0;
+   margin:auto;
+ }
+ @mixin circle($size){
+   width:$size;
+   height:$size;
+   border-radius:50%;
+   @content;
+ }
+ //@mixin circle($size:40px){
+ //  @include cube($size);
+ //  border-radius:50%;
+ //  @content;
+ //}
+ $medium-size:768px;
+@mixin on-medium{
+  @media screen and (max-width:$medium-size){
+    @content;
+  }
+}
+ $medium-size:480px;
+ @mixin on-medium{
+   @media screen and (max-width:$medium-size){
+     @content;
+   }
+ }
+ $small-size:480px;
+ @mixin on-small{
+   @media screen and (max-width:$small-size){
+     @content;
+   }
+ }
+ @mixin box{
+    border:1px solid #000;
+     border-radius:10px;
+     box-shadow:20px 20px 10px #ccc;
+ }
+ $m-size:1070px;
+ $s-size:768px;
+ @mixin ond{
+   @media screen and (min-width:$m-size){
+     @content;
+   }
+ }
+ @mixin onm{
+    @media screen and (max-width:$m-size){
+      @content;
+    }
+ }
+ @mixin ons{
+   @media screen and (max-width:$s-size){
+     @content;
+   }
+ }
+ //$size:1080px;
+ @mixin uesRem ($design-size) {
+   $device-list-size : $design-size,1080px,414px,412px,380px,375px,360px,320px;
+    @each $size in $device-list-size{
+      @media screen and (max-width: #{$size}){
+        html{
+          font-size:100px * $size/$design-size;
+        }
+      }
+    }
+ }
+ //在使用时要量下尺寸为多少，就按多少做就行，即$design-size就为多少
+ @mixin uesRemX($design-size) {
+   $device-list-size :320px,360px,375px,380px,412px,414px,1080px,$design-size;
+   @each $size in $device-list-size{
+     @media screen and (min-width: #{$size}){
+       html{
+         font-size:100px *$size/ $design-size;
+       }
+     }
+   }
+ }
+ //如何使用@include useRem(1080px)
+ //先引进宏 @import "minin"
+
+ //如何使用？
+ //  .header{
+ //    height:40px;
+ //     @include on-medium{
+ //       background:red;
+ //       width:800px;
+ //     }
+ //    height:40px;
+ //    @include on-small{
+ //      background:red;
+ //      width:800px;
+ //    }
+ //}
