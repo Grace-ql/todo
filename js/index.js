@@ -131,25 +131,42 @@ $(function(){
     }
     $('.bianqian-title .span-two').text('[' +todos.length+']')
     var flag=true;
+    var flag1=true;
+    var flag2=true;
         $('.more .add').on('click',function(){
             if(flag){
-            $('.content-box').css('height','auto');
+            $('.content-box').css('display','block');
             $('.content-box').find('.content').css('margin-bottom','0.1rem');
 
         flag=false;
     }else{
-        $('.content-box').css('height','0.97rem');
+        $('.content-box').css('display','none');
         flag=true;
     }
    })
-    // $('.fanhui').on('click',function(){
-    //     alert(1)
-    //
-    // })
-    $('.more .shuju').text('[' +(todos.length-2)+']')
-    // if($('.bianqian-title .span-two').text('[' +0+']')){
-    //     $('.more .shuju').text('[' +0+']');
-    // };
+    $('.more .addfinish').on('click',function(){
+        if(flag1){
+            $('.boxfinish').css('display','block');
+            $('.content-box').find('.content').css('margin-bottom','0.1rem');
+
+            flag1=false;
+        }else{
+            $('.boxfinish').css('display','none');
+            flag1=true;
+        }
+    })
+    $('.more .addwei').on('click',function(){
+        if(flag2){
+            $('.boxwei').css('display','block');
+            $('.content-box').find('.content').css('margin-bottom','0.1rem');
+
+            flag2=false;
+        }else{
+            $('.boxwei').css('display','none');
+            flag2=true;
+        }
+    })
+    $('.more .shuju').text('[' +(todos.length)+']')
     /////////已完成//////////////
     $.each(todos,function(i,v){
         if(v.state==1) {
@@ -216,7 +233,6 @@ $(function(){
     //////////////////header 未完成/////////////////////////////
     $('.icon-xinxi').on('click',function (){
         $('.now').removeClass('zuochu');
-        $('.bianqian-box .bianqian').removeClass('zuochu');
         $('.wei').toggleClass('zuochu');
         $('.bianqian-box .bianqian').removeClass('zuochu')
         renderwei();
@@ -225,7 +241,10 @@ $(function(){
         $('.content-box').find('.content').css('margin-bottom','0.1rem');
     })
     $('.icon-fanhui-copy').on('click',function(){
-        $('.left').removeClass('zuochu').addClass('zuohui');
+        $('.geren').remove();
+    })
+    $('.icon-fanhui-copy').on('touchend',function(){
+        alert('点击此处可退出个人事件编辑');
     })
     //////////////////////个人//////////////////////
     $('.icon-geren').on('click',function(){
@@ -247,18 +266,4 @@ $(function(){
             render();
         })
     })
-    // $('.geren .gongsisi').on('click','input',function(){
-    //     addtodos();
-    //     var v=$(this).val();
-    //     // var g=$('.gongsi').find('input').val()
-    //     $(this).val('');
-    //     $(this).focus();
-    //     $(this).blur(function (){
-    //         var newval=$(this).val();
-    //         $('.sub-content').text=newval;
-    //         todos[todos.length-1].title=newval;
-    //         localStorage.todo_data=JSON.stringify(todos);
-    //         render();
-    //     })
-    // })
 })
